@@ -23,7 +23,7 @@ class FSA:
         current_state = self.start_state   
         while True:
             if self.transitions[current_state][0].get('accept', False):
-                accepting = self.generateBool(p_true=0.3)
+                accepting = self.generateBool(p_true=0.6)
                 if accepting:
                     return word
             else:
@@ -37,28 +37,6 @@ class FSA:
                 word += str(next_input)
                 current_state = next_state
 
-    # def generate_word(self):
-    #     word = ""
-    #     current_state = self.start_state   
-    #     while True:
-    #         for transition in self.transitions[current_state]:
-    #             if transition.get('accept', False):
-    #                 accepting = self.generateBool(p_true=0.3)
-    #                 if accepting:
-    #                     return word
-    #             else:
-    #                 list_of_choices = list(self.transitions[current_state])
-    #                 if len(list_of_choices)  > 0:
-    #                     next_transition = random.choice(list_of_choices)
-    #                 else:
-    #                     next_transition = list_of_choices[0]
-    #                 next_state = next(iter(next_transition.values()))
-    #                 next_input = next(iter(next_transition.keys()))
-    #                 word += str(next_input)
-    #                 current_state = next_state
-    #                 return word
-            # break  # Exit the loop after finding the first acceptable transition
-
 
     def generateBool(self, p_true):
         return random.random() < p_true
@@ -70,11 +48,7 @@ def main():
         'q0': [{1: 'q1', 'start': True, 'accept': False}, {0: 'q0', 'start': True, 'accept': False}],
         'q1': [{0: 'q1', 'start': False, 'accept': True}, {1: 'q1', 'start': False, 'accept': True}]
     }
-
-
     first_fsa = FSA(states, alphabet, transitions)
-
-  
 
     # Test generate_word method
     num_tests = 5
